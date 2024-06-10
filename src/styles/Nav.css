@@ -23,8 +23,14 @@
   .nav-avatar {
     position: fixed;
     right: 20px;
+    top:17px;
     width: 30px;
     object-fit: contain;
+  }
+  @media screen and (max-width: 740px){
+    .nav-avatar {
+      display: none;
+    }
   }
   
   .nav-container-black {

@@ -1,0 +1,79 @@
+/* MovieSearch.css */
+
+.movie-search-container {
+    flex-grow: 1;
+    margin: 0 20px;
+  }
+  
+  .movie-search-form {
+    display: flex;
+    position: fixed;
+    right: 100px;
+    top:13px;
+    align-items: center;
+    width: 20%;
+    background-color: #323232;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  @media screen and (max-width: 740px){
+    .movie-search-form {
+        width: 60%;
+        right: 20px;
+        
+    }
+    .movie-search-input {
+        width: 10%;
+        padding: 5px;
+    }
+  }
+  .movie-search-input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  
+  .movie-search-button {
+    padding: 10px 20px;
+    background-color: #e50914;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .movie-search-button:hover {
+    background-color: #f40612;
+  }
+  
+  .movie-results {
+    margin-top: 10px;
+    color: #ffffff;
+  }
+  
+  .movie-item {
+    margin-bottom: 10px;
+  }
+  
+  .movie-item h3 {
+    margin: 5px 0;
+    font-size: 18px;
+  }
+  
+  .movie-item p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #b3b3b3;
+  }
+  
+  .movie-item img {
+    width: 100%;
+    max-width: 100px;
+    border-radius: 5px;
+  }
+  

@@ -1,8 +1,8 @@
-// src/components/Nav.js
 import React, { useEffect, useState } from "react";
-import '../styles/Nav.css'
+import '../styles/Nav.css';
+import MovieSearch from "./MovieSearch";
 
-function Nav() {
+function Nav({ setSearchActive }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -18,6 +18,7 @@ function Nav() {
         src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
         alt="Netflix"
       />
+      <MovieSearch setSearchActive={setSearchActive} />
       <img
         className="nav-avatar"
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPsVAeFlYeYOEUzb3TV1ML91_LPkkFML5lRQcMdr9nQu2CqO-WzT-RLmkM5_cOKvkaBkI&usqp=CAU"
