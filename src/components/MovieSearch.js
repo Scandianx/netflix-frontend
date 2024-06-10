@@ -1,16 +1,32 @@
+// src/components/MovieSearch.jsx
 import React, { useState } from 'react';
 import '../styles/MovieSearch.css';
 
-function MovieSearch({ setSearchActive }) {
+function MovieSearch({ setMovies, setSearchActive }) {
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState([]);
 
   const searchMovies = async (e) => {
     e.preventDefault();
     setSearchActive(true);
-    const response = await fetch(`/api/movies/search?title=${query}`);
-    const data = await response.json();
-    setMovies(data);
+
+    try {
+      const response = await fetch(`http://localhost:8080/movies/search/${query}`, {
+        headers: {
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnZXN0w6NvZGVwcm9qZXRvcyIsInN1YiI6ImVlZUBlIiwiZXhwIjoxNzE4MDQzMzM2fQ.5m9UQXVR293QTIdZyJg4zpbqEWeNyUme9CwiceuY6u8',
+          'Content-Type': 'application/json'
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data)
+      setMovies(data);
+    } catch (error) {
+      console.error('Erro ao buscar filmes:', error);
+      setSearchActive(false);
+    }
   };
 
   return (
@@ -25,15 +41,6 @@ function MovieSearch({ setSearchActive }) {
         />
         <button type="submit" className="movie-search-button">Search</button>
       </form>
-      <div className="movie-results">
-        {movies.map(movie => (
-          <div key={movie.id} className="movie-item">
-            <h3>{movie.title}</h3>
-            <p>{movie.overview}</p>
-            <img src={movie.posterUrl} alt={movie.title} />
-          </div>
-        ))}
-      </div>
     </div>
   );
 }

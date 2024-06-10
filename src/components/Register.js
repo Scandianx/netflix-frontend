@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import netflixLogo from '../assets/netflixLogo.png';
-const Login = () => {
+const Register = ({ toggleAuth, onLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [nome, setNome] = useState('');
@@ -67,20 +67,28 @@ const Login = () => {
 
          // Your login logic here
          const userData = {
-            email: email,
-            password: password
+            nome:nome,
+            login: email,
+            password: password,
+            role:"USER"
         };
 
         // Example of sending a POST request to localhost:80/auth/login
-        fetch('http://localhost:80/auth/login', {
+        fetch('http://localhost:8080/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(userData)
-        })
+        }).then(response => response.json())
         .then(response => {
-            console.log(response.token)
+            console.log(response)
+            
+            if (response.token) {
+                onLogin();
+                localStorage.setItem('token', response.token);
+            }
+            
         })
         .catch(error => {
             console.error('Error:', error);
@@ -154,7 +162,7 @@ const Login = () => {
                     </div>
                     
                     <div className="new-members">
-                        New to Netflix? <a href="" className="signup-link">Sign up now</a>.
+                    Já tem uma conta no MyNetflix? <button type="button" className="signup-link" onClick={toggleAuth}>Logar agora</button>.
                     </div>
                     
                 </form>
@@ -164,4 +172,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

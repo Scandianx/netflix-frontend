@@ -1,0 +1,116 @@
+/* src/styles/MovieDetails.css */
+.movie-details-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.movie-details-container {
+    background: #333333;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    height: 100%;
+    max-height: 740px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Adicionado para permitir o posicionamento do botão fechar */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red; /* Cor do ícone de fechar */
+}
+
+.details-content {
+    display: flex;
+}
+
+.poster-section {
+    margin-right: 20px;
+}
+
+.poster-section img {
+    max-width: 60%; /* Limitar o tamanho máximo da imagem para evitar bugs de layout */
+    border-radius: 8px; /* Adicionar borda arredondada */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Adicionar sombra */
+}
+
+.info-section {
+    flex: 1;
+    position: absolute;
+    left:380px;
+    top:70px;
+}
+@media screen and (max-width: 500px){
+    .info-section {
+        left:30px;
+        top:400px;
+        position:absolute;
+
+    }
+    .poster-section img {
+        max-width: 55%; /* Limitar o tamanho máximo da imagem para evitar bugs de layout */
+        
+    }
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.rating img {
+    margin-right: 5px;
+    max-height: 50px;
+}
+
+.movie-details-container h2 {
+    color: #fff; /* Cor do título */
+    margin-bottom: 10px;
+}
+
+.movie-details-container p {
+    color: #fff; /* Cor do texto */
+    margin-top: 10px;
+    line-height: 1.4; /* Espaçamento entre linhas */
+}
+
+.overview {
+    margin-top: 20px;
+}
+.fav-button {
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: 700;
+    border-radius: 0.2vw;
+    padding-left: 3rem; /* Aumenta o padding horizontal */
+    padding-right: 3rem; /* Aumenta o padding horizontal */
+    margin-right: 1rem;
+    padding-top: 1rem; /* Aumenta o padding vertical */
+    padding-bottom: 1rem; /* Aumenta o padding vertical */
+    font-size: 1.25rem; /* Aumenta o tamanho da fonte */
+    background-color: black;
+  }
+  
+  .fav-button:hover {
+    color: #000;
+    background-color: #e6e6e6;
+    transition: all 0.2s;
+  }

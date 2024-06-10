@@ -1,0 +1,44 @@
+/* src/styles/Movies.css */
+body {
+    background-color: #333;
+}
+
+.movies-container2 {
+    background-color: #333;
+    margin-top: 100px;
+    padding: 20px;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .movies-row2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-y: hidden;
+  }
+  
+  .movie2 {
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .movie2:hover {
+    transform: scale(1.05);
+  }
+  
+  .poster2 {
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .poster2:hover {
+    transform: scale(1.15);
+    transition: transform 0.3s ease;
+  }
+  
