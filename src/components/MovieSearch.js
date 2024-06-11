@@ -10,9 +10,11 @@ function MovieSearch({ setMovies, setSearchActive }) {
     setSearchActive(true);
 
     try {
+      const token = localStorage.getItem('token');
+      const tokenBearer = 'Bearer ' + token;
       const response = await fetch(`http://localhost:8080/movies/search/${query}`, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnZXN0w6NvZGVwcm9qZXRvcyIsInN1YiI6ImVlZUBlIiwiZXhwIjoxNzE4MDQzMzM2fQ.5m9UQXVR293QTIdZyJg4zpbqEWeNyUme9CwiceuY6u8',
+          'Authorization': tokenBearer,
           'Content-Type': 'application/json'
         }
       });
@@ -21,7 +23,7 @@ function MovieSearch({ setMovies, setSearchActive }) {
       }
 
       const data = await response.json();
-      console.log(data)
+      
       setMovies(data);
     } catch (error) {
       console.error('Erro ao buscar filmes:', error);

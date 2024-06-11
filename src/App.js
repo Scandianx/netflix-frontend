@@ -19,9 +19,12 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Verifica se o usuário está autenticado
 
   const handlePosterClick = async (id) => {
+    const token = localStorage.getItem('token');
+    const tokenBearer = 'Bearer ' + token;
+    console.log(id);
     const response = await fetch(`http://localhost:8080/movies/${id}`, {
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnZXN0w6NvZGVwcm9qZXRvcyIsInN1YiI6ImVlZUBlIiwiZXhwIjoxNzE4MDQzMzM2fQ.5m9UQXVR293QTIdZyJg4zpbqEWeNyUme9CwiceuY6u8',
+        'Authorization': tokenBearer,
         'Content-Type': 'application/json'
       }
     });
@@ -51,10 +54,10 @@ function App() {
         <>
           <Nav setSearchActive={setSearchActive} setMovies={setMovies} />
           {!searchActive && <Banner />}
-          {!searchActive && <Movies />}
+          {!searchActive && <Movies onPosterClick={handlePosterClick}/>}
           {searchActive && <MoviesList movies={movies} onPosterClick={handlePosterClick} />}
           {selectedMovie && <MovieDetails movie={selectedMovie} onClose={handleCloseDetails} />}
-          <button onClick={handleLogout}>Logout</button> // Botão de logout
+          
         </>
       ) : (
         <div>
