@@ -22,7 +22,7 @@ function App() {
     const token = localStorage.getItem('token');
     const tokenBearer = 'Bearer ' + token;
     console.log(id);
-    const response = await fetch(`http://localhost:8080/movies/${id}`, {
+    const response = await fetch(`http://localhost:8081/movies/${id}`, {
       headers: {
         'Authorization': tokenBearer,
         'Content-Type': 'application/json'

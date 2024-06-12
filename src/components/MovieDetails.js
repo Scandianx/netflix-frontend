@@ -8,7 +8,7 @@ const MovieDetails = ({ movie, onClose }) => {
   const handleFavoriteClick = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:8080/favs', {
+      const response = await axios.post('http://localhost:8081/favs', {
         id: movie.idDb
       }, {
         headers: {
@@ -21,6 +21,25 @@ const MovieDetails = ({ movie, onClose }) => {
     }
   };
 
+  const truncateOverview = (overview, maxLength) => {
+    if (overview.length <= maxLength) {
+      return overview;
+    }
+
+    const truncated = overview.slice(0, maxLength);
+    const lastPeriodIndex = truncated.lastIndexOf('.');
+
+    if (lastPeriodIndex === -1) {
+      // Se não houver ponto final, apenas corte no limite de caracteres
+      return truncated;
+    }
+
+    // Retorne o texto truncado até o último ponto final encontrado
+    return truncated.slice(0, lastPeriodIndex + 1);
+  };
+
+  const truncatedOverview = truncateOverview(movie.overview, 450); // Ajuste o número conforme necessário
+
   return (
     <div className="movie-details-overlay" onClick={onClose}>
       <div className="movie-details-container" onClick={(e) => e.stopPropagation()}>
@@ -31,10 +50,10 @@ const MovieDetails = ({ movie, onClose }) => {
             <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title}/>
           </div>
           <div className="info-section">
-            <p className="overview">{movie.overview}</p>
+            <p className="overview">{truncatedOverview}</p>
             <div className="rating">
               <img src={estrela} alt="star"/>
-              <p>{movie.vote_average/2}</p>
+              <p>{movie.vote_average / 2}</p>
             </div>
             <p>Data de lançamento: {movie.release_date}</p>
             <button className="fav-button" onClick={handleFavoriteClick}>Favoritos</button>

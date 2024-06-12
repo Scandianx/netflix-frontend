@@ -67,6 +67,11 @@
         max-width: 55%; /* Limitar o tamanho máximo da imagem para evitar bugs de layout */
         
     }
+    .overview {
+        
+        max-width: 350px;
+        font-size: 15px;
+    }
 }
 
 .rating {
@@ -92,6 +97,7 @@
 
 .overview {
     margin-top: 20px;
+    
 }
 .fav-button {
     cursor: pointer;
