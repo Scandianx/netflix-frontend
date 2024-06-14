@@ -22,7 +22,7 @@ function App() {
     const token = localStorage.getItem('token');
     const tokenBearer = 'Bearer ' + token;
     console.log(id);
-    const response = await fetch(`http://localhost:8081/movies/${id}`, {
+    const response = await fetch(`https://netflix-backend-gi2f.onrender.com/movies/${id}`, {
       headers: {
         'Authorization': tokenBearer,
         'Content-Type': 'application/json'

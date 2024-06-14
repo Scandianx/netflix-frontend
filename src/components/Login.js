@@ -56,7 +56,7 @@ const Login = ({ toggleAuth, onLogin}) => {
         };
 
         // Example of sending a POST request to localhost:80/auth/login
-        fetch('http://localhost:8081/auth/login', {
+        fetch('https://netflix-backend-gi2f.onrender.com/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

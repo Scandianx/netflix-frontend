@@ -8,7 +8,7 @@ const MovieDetails = ({ movie, onClose }) => {
   const handleFavoriteClick = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:8081/favs', {
+      const response = await axios.post('https://netflix-backend-gi2f.onrender.com/favs', {
         id: movie.idDb
       }, {
         headers: {

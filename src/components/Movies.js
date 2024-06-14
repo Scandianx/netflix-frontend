@@ -10,7 +10,7 @@ const Movies = ({onPosterClick}) => {
       try {
         const token = localStorage.getItem('token');
         const tokenBearer = 'Bearer ' + token;
-        const response = await axios.get('http://localhost:8081/movies/homepage', {
+        const response = await axios.get('https://netflix-backend-gi2f.onrender.com/movies/homepage', {
           headers: {
             Authorization: tokenBearer
           }
