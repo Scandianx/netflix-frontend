@@ -16,8 +16,8 @@
 
 .upper{
     background-color: rgba(0, 0, 0, 0.6);
-    padding-top: 100px;
-    padding-bottom: 410px;
+    
+    padding-bottom: 110px;
 }
 
 .bottom{
@@ -78,7 +78,7 @@
 }
 
 .input-text input{
-    width: 100%;
+    width: 90%;
     height: 45px;
     background-color: #333;
     color: white;
@@ -101,7 +101,7 @@
 
 .signin-button{
     margin-top: 20px;
-    width: 100%;
+    width: 90%;
     padding: 13px;
     border-radius: 5px;
     background-color: red;
