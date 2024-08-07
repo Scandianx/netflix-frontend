@@ -12,7 +12,7 @@ function MovieSearch({ setMovies, setSearchActive }) {
     try {
       const token = localStorage.getItem('token');
       const tokenBearer = 'Bearer ' + token;
-      const response = await fetch(`https://netflix-backend-gi2f.onrender.com/movies/search/${query}`, {
+      const response = await fetch(`http://localhost:8081/movies/search/${query}`, {
         headers: {
           'Authorization': tokenBearer,
           'Content-Type': 'application/json'

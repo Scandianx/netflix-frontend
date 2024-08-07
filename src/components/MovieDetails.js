@@ -1,21 +1,23 @@
+// src/components/MovieDetails.jsx
 import React from 'react';
 import '../styles/MovieDetails.css';
 import estrela from '../assets/estrela.png';
 import axios from 'axios';
 
-const MovieDetails = ({ movie, onClose }) => {
+const MovieDetails = ({ movie, onClose, onFavoriteUpdate }) => {
 
   const handleFavoriteClick = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('https://netflix-backend-gi2f.onrender.com/favs', {
+      const response = await axios.post('http://localhost:8081/favs', {
         id: movie.idDb
       }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log(response.data); // Aqui você pode fazer o que quiser com a resposta da requisição
+      console.log(response.data + "aaaaaaaaa"); // Aqui você pode fazer o que quiser com a resposta da requisição
+      onFavoriteUpdate(); // Chame a função de atualização dos favoritos
     } catch (error) {
       console.error('Error adding movie to favorites:', error);
     }

@@ -8,7 +8,6 @@ import Nav from './components/Nav';
 import Banner from './components/Banner';
 import Movies from './components/Movies';
 import MoviesList from './components/MovieList';
-import MovieSearch from './components/MovieSearch';
 import MovieDetails from './components/MovieDetails';
 
 function App() {
@@ -17,12 +16,13 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showLogin, setShowLogin] = useState(true); // Controla qual componente de autenticação está sendo exibido
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Verifica se o usuário está autenticado
+  const [favoritesUpdated, setFavoritesUpdated] = useState(false); // Estado para controlar a atualização dos favoritos
 
   const handlePosterClick = async (id) => {
     const token = localStorage.getItem('token');
     const tokenBearer = 'Bearer ' + token;
     console.log(id);
-    const response = await fetch(`https://netflix-backend-gi2f.onrender.com/movies/${id}`, {
+    const response = await fetch(`http://localhost:8081/movies/${id}`, {
       headers: {
         'Authorization': tokenBearer,
         'Content-Type': 'application/json'
@@ -44,8 +44,10 @@ function App() {
     setIsLoggedIn(true); // Define o estado de autenticação como true quando o usuário faz login
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false); // Define o estado de autenticação como false quando o usuário faz logout
+  
+
+  const handleFavoriteUpdate = () => {
+    setFavoritesUpdated(!favoritesUpdated); // Atualiza o estado de favoritos
   };
 
   return (
@@ -54,9 +56,9 @@ function App() {
         <>
           <Nav setSearchActive={setSearchActive} setMovies={setMovies} />
           {!searchActive && <Banner />}
-          {!searchActive && <Movies onPosterClick={handlePosterClick}/>}
+          {!searchActive && <Movies onPosterClick={handlePosterClick} favoritesUpdated={favoritesUpdated} />}
           {searchActive && <MoviesList movies={movies} onPosterClick={handlePosterClick} />}
-          {selectedMovie && <MovieDetails movie={selectedMovie} onClose={handleCloseDetails} />}
+          {selectedMovie && <MovieDetails movie={selectedMovie} onClose={handleCloseDetails} onFavoriteUpdate={handleFavoriteUpdate} />}
           
         </>
       ) : (

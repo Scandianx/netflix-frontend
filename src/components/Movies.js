@@ -1,8 +1,9 @@
+// src/components/Movies.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Movies.css';
 
-const Movies = ({onPosterClick}) => {
+const Movies = ({ onPosterClick, favoritesUpdated }) => {
   const [sections, setSections] = useState([]);
 
   useEffect(() => {
@@ -10,7 +11,7 @@ const Movies = ({onPosterClick}) => {
       try {
         const token = localStorage.getItem('token');
         const tokenBearer = 'Bearer ' + token;
-        const response = await axios.get('https://netflix-backend-gi2f.onrender.com/movies/homepage', {
+        const response = await axios.get('http://localhost:8081/movies/homepage', {
           headers: {
             Authorization: tokenBearer
           }
@@ -22,7 +23,7 @@ const Movies = ({onPosterClick}) => {
     };
 
     fetchSections();
-  }, []);
+  }, [favoritesUpdated]); // Adicione favoritesUpdated como dependência
 
   return (
     <div className="movies-container">
