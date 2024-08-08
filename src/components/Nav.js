@@ -1,4 +1,3 @@
-// src/components/Nav.jsx
 import React, { useEffect, useState } from "react";
 import '../styles/Nav.css';
 import MovieSearch from "./MovieSearch";
@@ -12,13 +11,18 @@ function Nav({ setSearchActive, setMovies }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleLogoClick = () => {
+    setSearchActive(false);
+    setMovies([]);
+  };
+
   return (
     <div className={`nav-container ${show && "nav-container-black"}`}>
       <img
         className="nav-logo"
         src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
         alt="Netflix"
-        
+        onClick={handleLogoClick}
       />
       <MovieSearch setSearchActive={setSearchActive} setMovies={setMovies} />
       <img

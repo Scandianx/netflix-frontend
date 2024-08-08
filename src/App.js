@@ -44,8 +44,6 @@ function App() {
     setIsLoggedIn(true); // Define o estado de autenticação como true quando o usuário faz login
   };
 
-  
-
   const handleFavoriteUpdate = () => {
     setFavoritesUpdated(!favoritesUpdated); // Atualiza o estado de favoritos
   };
@@ -59,7 +57,6 @@ function App() {
           {!searchActive && <Movies onPosterClick={handlePosterClick} favoritesUpdated={favoritesUpdated} />}
           {searchActive && <MoviesList movies={movies} onPosterClick={handlePosterClick} />}
           {selectedMovie && <MovieDetails movie={selectedMovie} onClose={handleCloseDetails} onFavoriteUpdate={handleFavoriteUpdate} />}
-          
         </>
       ) : (
         <div>
