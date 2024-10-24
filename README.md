@@ -1,70 +1,163 @@
-# Getting Started with Create React App
+### Documentação do Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 1. Visão Geral do Projeto
 
-In the project directory, you can run:
+O frontend desta aplicação foi desenvolvido utilizando **React.js**, uma biblioteca popular para criação de interfaces de usuário. O objetivo é fornecer uma interface amigável e responsiva para que os usuários possam se cadastrar, realizar login, explorar filmes, adicionar favoritos e visualizar detalhes de filmes.
 
-### `npm start`
+### Tecnologias Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React.js**: Framework principal para a criação da interface.
+- **CSS**: Para estilização dos componentes, garantindo uma experiência de usuário fluida.
+- **Axios**: Para realizar requisições HTTP.
+- **LocalStorage**: Para armazenar e recuperar o token JWT do usuário após o login, facilitando a autenticação contínua.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 2. Estrutura do Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A estrutura do frontend foi organizada em componentes reutilizáveis, que juntos compõem as principais funcionalidades da aplicação. Abaixo estão descrições dos principais componentes e suas funcionalidades.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2.1 Componentes do Frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### **2.1.1 `Banner`**
+- **Arquivo**: `src/components/Banner.js`
+- **Descrição**: 
+  - O componente `Banner` exibe um destaque do filme na parte superior da página principal. Ele contém uma imagem de fundo (pôster do filme), título, descrição, e botões de ação, como "Assistir" e "Favoritos".
+  - Funções importantes:
+    - `truncate()`: Função que limita o número de caracteres da descrição do filme.
+  - **Responsabilidade**: Fornecer um destaque visual do filme com opções de interação para o usuário.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### **2.1.2 `Login`**
+- **Arquivo**: `src/components/Login.jsx`
+- **Descrição**:
+  - O componente `Login` é responsável por autenticar o usuário no sistema. Ele contém um formulário para o login via e-mail e senha.
+  - **Validações**:
+    - Verifica se o e-mail tem um formato válido.
+    - A senha deve ter entre 4 e 60 caracteres.
+  - **Integração**:
+    - Envia uma requisição POST para o endpoint `/auth/login`, e, se a autenticação for bem-sucedida, o token JWT é armazenado no **localStorage**.
+  - **Responsabilidade**: Gerenciar o processo de login dos usuários.
 
-### `npm run eject`
+#### **2.1.3 `MovieDetails`**
+- **Arquivo**: `src/components/MovieDetails.jsx`
+- **Descrição**:
+  - Este componente exibe os detalhes de um filme específico, incluindo o pôster, a sinopse, a data de lançamento e a classificação.
+  - **Funções importantes**:
+    - `truncateOverview()`: Limita o número de caracteres da sinopse do filme.
+    - `handleFavoriteClick()`: Adiciona ou remove o filme da lista de favoritos do usuário através de uma requisição POST para o endpoint `/favs`.
+  - **Responsabilidade**: Exibir informações detalhadas de um filme e permitir que o usuário o adicione/remova dos favoritos.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### **2.1.4 `MoviesList`**
+- **Arquivo**: `src/components/MoviesList.jsx`
+- **Descrição**:
+  - Exibe uma lista de filmes com base nos dados recebidos como props. Cada pôster de filme é clicável e aciona a função `onPosterClick`.
+  - **Responsabilidade**: Renderizar a lista de filmes, permitindo que o usuário clique para ver detalhes de cada filme.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### **2.1.5 `Movies`**
+- **Arquivo**: `src/components/Movies.jsx`
+- **Descrição**:
+  - Exibe várias seções de filmes, como "Favoritos", "Populares" e "Lançamentos", obtidas a partir do backend.
+  - **Integração**:
+    - Realiza uma requisição GET para o endpoint `/movies/homepage`, passando o token JWT do usuário para personalizar as seções exibidas.
+  - **Responsabilidade**: Exibir as seções de filmes personalizadas com base nos dados fornecidos pelo backend.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### **2.1.6 `MovieSearch`**
+- **Arquivo**: `src/components/MovieSearch.jsx`
+- **Descrição**:
+  - Permite ao usuário buscar filmes pelo título. Ao enviar o formulário, o componente realiza uma requisição GET para `/movies/search/{title}` e atualiza a lista de filmes com os resultados da pesquisa.
+  - **Responsabilidade**: Gerenciar a funcionalidade de busca de filmes pelo título.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### **2.1.7 `Nav`**
+- **Arquivo**: `src/components/Nav.jsx`
+- **Descrição**:
+  - Renderiza a barra de navegação com o logotipo da aplicação, o campo de busca e o avatar do usuário. O componente também implementa a funcionalidade de alteração de cor da barra ao rolar a página.
+  - **Responsabilidade**: Prover navegação para as principais funcionalidades da aplicação.
 
-## Learn More
+#### **2.1.8 `Register`**
+- **Arquivo**: `src/components/Register.jsx`
+- **Descrição**:
+  - Componente responsável pelo cadastro de novos usuários. O usuário pode se cadastrar fornecendo nome, e-mail e senha.
+  - **Validações**:
+    - O e-mail é validado para garantir que tenha um formato válido.
+    - A senha deve conter entre 4 e 60 caracteres.
+  - **Integração**:
+    - Envia uma requisição POST para o endpoint `/auth/register`. Se o cadastro for bem-sucedido, o usuário é autenticado automaticamente.
+  - **Responsabilidade**: Gerenciar o processo de registro de novos usuários.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 3. Fluxo de Autenticação
 
-### Code Splitting
+### Login
+1. O usuário insere seu e-mail e senha na tela de login.
+2. O componente `Login` valida os campos localmente.
+3. Uma requisição POST é enviada para o endpoint `/auth/login`, com o corpo contendo os dados do usuário.
+4. Se a autenticação for bem-sucedida, o token JWT recebido é armazenado no **localStorage**.
+5. O token é então utilizado para autenticar o usuário em futuras requisições.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Registro
+1. O usuário insere seu nome, e-mail e senha na tela de registro.
+2. O componente `Register` valida os campos localmente.
+3. Uma requisição POST é enviada para o endpoint `/auth/register`.
+4. Se o registro for bem-sucedido, o token JWT é armazenado no **localStorage**.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 4. Requisições HTTP e Integração com Backend
 
-### Making a Progressive Web App
+### Utilização do Axios
+O **Axios** é utilizado para realizar as requisições HTTP ao backend, facilitando a integração com a API. As principais funcionalidades incluem:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Autenticação**: O token JWT, armazenado no **localStorage**, é enviado no cabeçalho das requisições para endpoints protegidos, como `/favs` e `/movies/homepage`.
+  
+### Exemplos de Requisições
+#### Login
+```javascript
+fetch('http://localhost:8081/auth/login', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData)
+})
+```
 
-### Advanced Configuration
+#### Adicionar Filme aos Favoritos
+```javascript
+axios.post('http://localhost:8081/favs', {
+    id: movie.idDb
+}, {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+});
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 5. Estilização
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Estrutura de Estilos (CSS)
+Os arquivos CSS são organizados por componentes e estão localizados na pasta `src/styles`. Cada componente possui um arquivo de estilo correspondente que define a aparência e o layout da interface.
 
-### `npm run build` fails to minify
+Exemplo de uso no `Banner.css`:
+```css
+.banner-container {
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 6. LocalStorage
+
+- O **localStorage** é utilizado para armazenar o token JWT após o login ou registro do usuário.
+- Esse token é persistido entre sessões e utilizado para autenticar as requisições subsequentes, eliminando a necessidade de o usuário fazer login novamente até que o token expire.
+
+---
