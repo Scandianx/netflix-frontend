@@ -105,7 +105,7 @@ const Register = ({ toggleAuth, onLogin }) => {
             </div>
             <div className="login-div">
                 <form className="login" onSubmit={handleSubmit}>
-                    <h1>Sign In</h1>
+                    <h1>Registrar</h1>
                     <div className="input-text">
                         <input
                             type="text"
@@ -117,7 +117,7 @@ const Register = ({ toggleAuth, onLogin }) => {
                             onBlur={handleEmailBlur}
                         />
                         {(emailTouched && !validateEmail(email)) && (
-                            <div className="warning-input"><h5>Please enter a valid email.</h5></div>
+                            <div className="warning-input"><h5>Coloque um email válido, por favor</h5></div>
                         )}
                     </div>
                     <div className="input-text">
@@ -125,13 +125,13 @@ const Register = ({ toggleAuth, onLogin }) => {
                             type="nome"
                             id="nome"
                             name="nome"
-                            placeholder="Name"
+                            placeholder="Nome"
                             value={nome}
                             onChange={handleNomeChange}
                             onBlur={handleNomeBlur}
                         />
                         {nomeTouched && !(password.length >= 4 && password.length <= 60) && (
-                            <div className="warning-input">Your password must contain between 4 and 60 characters.</div>
+                            <div className="warning-input">Sua senha deve ter 4 dígitos pelo menos</div>
                         )}
                     </div>
                     <div className="input-text">
@@ -139,24 +139,24 @@ const Register = ({ toggleAuth, onLogin }) => {
                             type="password"
                             id="inputPassword"
                             name="password"
-                            placeholder="Password"
+                            placeholder="Senha"
                             value={password}
                             onChange={handlePasswordChange}
                             onBlur={handlePasswordBlur}
                         />
                         {passwordTouched && !(password.length >= 4 && password.length <= 60) && (
-                            <div className="warning-input">Your password must contain between 4 and 60 characters.</div>
+                            <div className="warning-input">Sua senha deve ter 4 dígitos pelo menos</div>
                         )}
                     </div>
                     <div>
                         <button className="signin-button" type="submit" disabled={!canSubmit()}>
-                            Sign In
+                            Registrar
                         </button>
                     </div>
                     <div className="remember-flex">
                         <div>
                             <input type="checkbox" />
-                            <label className="color_text">Remember me</label>
+                            <label className="color_text">Lembrar-me</label>
                         </div>
                         
                     </div>

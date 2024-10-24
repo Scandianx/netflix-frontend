@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../styles/Nav.css';
 import MovieSearch from "./MovieSearch";
-
+import netflixLogo from '../assets/netflixLogo.png';
 function Nav({ setSearchActive, setMovies }) {
   const [show, setShow] = useState(false);
 
@@ -20,7 +20,7 @@ function Nav({ setSearchActive, setMovies }) {
     <div className={`nav-container ${show && "nav-container-black"}`}>
       <img
         className="nav-logo"
-        src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+        src={netflixLogo}
         alt="Netflix"
         onClick={handleLogoClick}
       />

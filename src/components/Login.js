@@ -83,13 +83,13 @@ const Login = ({ toggleAuth, onLogin}) => {
                 </div>
                 <div className="login-div">
                     <form className="login" onSubmit={handleSubmit}>
-                        <h1>Sign In</h1>
+                        <h1>Login</h1>
                         <div className="input-text">
                             <input
                                 type="text"
                                 id="inputEmail"
                                 name="email"
-                                placeholder="Email or phone number"
+                                placeholder="Email"
                                 value={email}
                                 onChange={handleEmailChange}
                                 onBlur={handleEmailBlur}
@@ -103,7 +103,7 @@ const Login = ({ toggleAuth, onLogin}) => {
                                 type="password"
                                 id="inputPassword"
                                 name="password"
-                                placeholder="Password"
+                                placeholder="Senha"
                                 value={password}
                                 onChange={handlePasswordChange}
                                 onBlur={handlePasswordBlur}
@@ -114,17 +114,17 @@ const Login = ({ toggleAuth, onLogin}) => {
                         </div>
                         <div>
                             <button className="signin-button" type="submit" disabled={!canSubmit()}>
-                                Sign In
+                                Entrar
                             </button>
                         </div>
                         <div className="remember-flex">
                             <div>
                                 <input type="checkbox" />
-                                <label className="color_text">Remember me</label>
+                                <label className="color_text">Lembrar-me</label>
                             </div>
                         </div>
                         <div className="new-members">
-                            New to MyNetflix? <button type="button" className="signup-link" onClick={toggleAuth}>Sign up now</button>.
+                            Novo na MyNetflix? <button type="button" className="signup-link" onClick={toggleAuth}>Registrar</button>.
                         </div>
                     </form>
                 </div>
